@@ -1,0 +1,62 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace btbuoi4
+{
+    public partial class Form2 : Form
+    {
+        private string _msnv;   
+        private string _tenNV; 
+        private string _luongCB; 
+        public string MSNV
+        {
+            get => _msnv;
+            set => _msnv = value;
+        }
+
+        public string TenNV
+        {
+            get => _tenNV;
+            set => _tenNV = value;
+        }
+
+        public string LuongCB
+        {
+            get => _luongCB;
+            set => _luongCB = value;
+        }
+        public Form2()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MSNV = textBox1.Text;   
+            TenNV = textBox2.Text;  
+            LuongCB = textBox3.Text; 
+
+            if (string.IsNullOrWhiteSpace(MSNV) || string.IsNullOrWhiteSpace(TenNV) || string.IsNullOrWhiteSpace(LuongCB))
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+    }
+}
