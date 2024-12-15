@@ -1,0 +1,64 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace btbuoi4
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2();
+            if (form2.ShowDialog() == DialogResult.OK)
+            {
+                dataGridView1.Rows.Add(form2.MSNV, form2.TenNV, form2.LuongCB);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                var selectedRow = dataGridView1.SelectedRows[0];
+                Form2 form2 = new Form2
+                {
+                    MSNV = selectedRow.Cells["MSNV"].Value?.ToString(),
+                    TenNV = selectedRow.Cells["TenNV"].Value?.ToString(),
+                    LuongCB = selectedRow.Cells["LuongCB"].Value?.ToString()
+                };
+
+                if (form2.ShowDialog() == DialogResult.OK)
+                {
+                    
+                    selectedRow.Cells["MSNV"].Value = form2.MSNV;
+                    selectedRow.Cells["TenNV"].Value = form2.TenNV;
+                    selectedRow.Cells["LuongCB"].Value = form2.LuongCB;
+                }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                dataGridView1.Rows.RemoveAt(dataGridView1.SelectedRows[0].Index);
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+    }
+}
